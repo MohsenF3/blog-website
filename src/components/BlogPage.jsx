@@ -9,22 +9,22 @@ const BlogPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
-  const pageSize = 12;
+  let pageSize = 12;
 
   useEffect(() => {
     async function fetchData() {
       let url = `http://localhost:5000/blogs?page=${currentPage}&limit=${pageSize}`;
-      if (selectedCategory) {
-        url += `&category=${selectedCategory}`;
-      }
       let response = await fetch(url);
       let data = await response.json();
       setBlogs(data);
     }
-    fetchData();
-  }, [currentPage, pageSize, selectedCategory]);
 
-  const handlePageChange = (number) => setCurrentPage(number);
+    fetchData();
+  }, []);
+
+  const handlePageChange = (num) => {
+    setCurrentPage(num);
+  };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -36,24 +36,25 @@ const BlogPage = () => {
     <div className="">
       <div>
         <BlogCategorySelection
-          onSelectCategory={handleCategoryChange}
+          onCategoryChange={handleCategoryChange}
           activeCategory={activeCategory}
+          selectedCategory={selectedCategory}
         />
       </div>
       <div>
         <BlogCard
           blogs={blogs}
           currentPage={currentPage}
-          selectedCategory={selectedCategory}
           pageSize={pageSize}
+          selectedCategory={selectedCategory}
         />
       </div>
       <div>
         <BlogPagination
-          onPageChange={handlePageChange}
-          blogs={blogs}
           currentPage={currentPage}
+          onPageChange={handlePageChange}
           pageSize={pageSize}
+          blogs={blogs}
         />
       </div>
     </div>

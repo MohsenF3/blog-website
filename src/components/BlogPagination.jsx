@@ -1,43 +1,41 @@
-const BlogPagination = ({ blogs, currentPage, onPageChange, pageSize }) => {
+const BlogPagination = ({ blogs, currentPage, pageSize, onPageChange }) => {
   //
-  const totalPages = Math.ceil(blogs.length / pageSize);
+  let totalPages = Math.ceil(blogs.length / pageSize);
 
-  const renderpaginationLinks = () =>
+  // create a function that return 1 to totlaPages
+  const renderPaginationLinks = () =>
     Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-      <li
-        className={` w-8  text-black h-8 grid place-items-center hover:bg-gray-400 border-2 ${
-          number === currentPage ? "bg-blue-400 text-white" : ""
+      <button
+        className={`mx-1 w-8 h-8 bg-gray-400 rounded-md hover:bg-gray-600 ${
+          currentPage === number && "bg-blue-500 text-white"
         }`}
         key={number}
+        onClick={() => onPageChange(number)}
       >
-        <a href="#" onClick={() => onPageChange(number)}>
-          {number}
-        </a>
-      </li>
+        {number}
+      </button>
     ));
 
   return (
-    <ul className="flex items-center justify-center my-10 gap-6">
-      <li>
+    <div className="flex items-center justify-center my-10 gap-5">
+      <div>
         <button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
           className=" hover:text-blue-500 disabled:text-gray-400"
+          disabled={currentPage === 1}
         >
           Previous
         </button>
-      </li>
-      <div className="flex gap-4">{renderpaginationLinks()}</div>
-      <li>
+      </div>
+      <div>{renderPaginationLinks()}</div>
+      <div>
         <button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
           className=" hover:text-blue-500 disabled:text-gray-400"
+          disabled={currentPage === totalPages}
         >
           Next
         </button>
-      </li>
-    </ul>
+      </div>
+    </div>
   );
 };
 

@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 // icons
 import { FaUser } from "react-icons/fa";
 
-const BlogCard = ({ blogs, currentPage, selectedCategory, pageSize }) => {
+const BlogCard = ({ blogs, currentPage, pageSize, selectedCategory }) => {
+  //
   const filteredBlogs = blogs
     .filter(
       ({ category }) => !selectedCategory || category === selectedCategory
