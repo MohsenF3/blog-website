@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { Home, Services, About, Blogs, Contact } from "./pages";
+import { Home, Services, About, Blogs, Contact, SingleBlog } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,12 @@ const router = createBrowserRouter([
         element: <Blogs />,
       },
       {
+        path: "/blogs/:id",
+        element: <SingleBlog />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/blogs/${params.id}`),
+      },
+      {
         path: "/contact",
         element: <Contact />,
       },
@@ -40,5 +46,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-// "type": "module",

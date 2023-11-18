@@ -15,8 +15,8 @@ const Banner = () => {
         inventore!
       </h3>
       <Link
-        to=""
-        className="flex items-center group justify-center gap-2 mt-8  text-gray-300 hover:text-orange-500"
+        to="/"
+        className=" inline-flex items-center group justify-center gap-2 mt-8  text-gray-300 hover:text-orange-500"
       >
         Learn more{" "}
         <FaArrowRight className=" group-hover:translate-x-2 transition duration-150" />

@@ -15,8 +15,9 @@ const BlogCard = ({ blogs, currentPage, pageSize, selectedCategory }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {filteredBlogs.map(({ id, image, title, author, published_date }) => (
         <Link
+          to={`/blogs/${id}`}
           key={id}
-          className="px-5 py-3 shadow-md hover:shadow-lg rounded-md transition duration-150"
+          className="max-sm:mx-2 px-5 py-3 shadow-md hover:shadow-lg rounded-md transition duration-150"
         >
           <div>
             <img src={image} alt="" className=" w-full object-cover" />
@@ -25,7 +26,7 @@ const BlogCard = ({ blogs, currentPage, pageSize, selectedCategory }) => {
             {title}
           </h3>
           <span className="flex items-center gap-3 text-md text-gray-500">
-            <FaUser />
+            <FaUser className="text-black" />
             {author}
           </span>
           <span className="text-sm text-gray-500">

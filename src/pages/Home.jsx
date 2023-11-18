@@ -1,9 +1,13 @@
 import Banner from "../components/Banner";
+import BlogPage from "../components/BlogPage";
 
 const Home = () => {
   return (
-    <div className="">
+    <div>
       <Banner />
+      <div className="max-w-7xl mx-auto">
+        <BlogPage />
+      </div>
     </div>
   );
 };

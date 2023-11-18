@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import BlogCard from "./BlogCard";
 import BlogCategorySelection from "./BlogCategorySelection";
 import BlogPagination from "./BlogPagination";
+import SideBar from "./SideBar";
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
@@ -14,13 +15,17 @@ const BlogPage = () => {
   useEffect(() => {
     async function fetchData() {
       let url = `http://localhost:5000/blogs?page=${currentPage}&limit=${pageSize}`;
+      if (selectedCategory) {
+        url += `&category=${selectedCategory}`;
+        console.log(url);
+      }
       let response = await fetch(url);
       let data = await response.json();
       setBlogs(data);
     }
 
     fetchData();
-  }, []);
+  }, [selectedCategory, currentPage, pageSize]);
 
   const handlePageChange = (num) => {
     setCurrentPage(num);
@@ -41,13 +46,17 @@ const BlogPage = () => {
           selectedCategory={selectedCategory}
         />
       </div>
-      <div>
+      <div className="flex gap-10">
         <BlogCard
           blogs={blogs}
           currentPage={currentPage}
           pageSize={pageSize}
           selectedCategory={selectedCategory}
         />
+
+        <div className="hidden md:block">
+          <SideBar />
+        </div>
       </div>
       <div>
         <BlogPagination

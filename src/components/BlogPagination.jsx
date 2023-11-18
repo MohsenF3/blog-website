@@ -6,8 +6,21 @@ const BlogPagination = ({ blogs, currentPage, pageSize, onPageChange }) => {
   const renderPaginationLinks = () =>
     Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
       <button
-        className={`mx-1 w-8 h-8 bg-gray-400 rounded-md hover:bg-gray-600 ${
-          currentPage === number && "bg-blue-500 text-white"
+        className={`mx-1 w-8 h-8 rounded-md hover:bg-gray-600 ${
+          currentPage === number ? "bg-blue-500 text-white" : "bg-gray-400 "
+        }`}
+        key={number}
+        onClick={() => onPageChange(number)}
+      >
+        {number}
+      </button>
+    ));
+
+  const renderPaginationLink = () =>
+    Array.from({ length: 4 }, (_, i) => i + 1).map((number) => (
+      <button
+        className={`mx-1 w-8 h-8 rounded-md hover:bg-gray-600 ${
+          currentPage === number ? "bg-blue-500 text-white" : "bg-gray-400 "
         }`}
         key={number}
         onClick={() => onPageChange(number)}
@@ -26,7 +39,21 @@ const BlogPagination = ({ blogs, currentPage, pageSize, onPageChange }) => {
           Previous
         </button>
       </div>
-      <div>{renderPaginationLinks()}</div>
+
+      {/*  */}
+
+      <div>
+        <div className="lg:hidden">
+          {renderPaginationLink()}
+          {/* This component will be visible on screens smaller than lg (large) */}
+        </div>
+        <div className="hidden lg:block">
+          {/* This component will be visible on lg (large) screens and above */}
+          {renderPaginationLinks()}
+        </div>
+      </div>
+
+      {/*  */}
       <div>
         <button
           className=" hover:text-blue-500 disabled:text-gray-400"
