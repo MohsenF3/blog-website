@@ -36,9 +36,7 @@ const ContactForm = () => {
           showConfirmButton: false,
           timer: 3000,
         });
-
-        // Clear form fields
-        resetForm();
+        
       } catch (error) {
         // Handle errors during the submission
         Swal.fire({
@@ -47,11 +45,12 @@ const ContactForm = () => {
           text: "Something went wrong!",
           footer: error.message,
         });
-        // Clear form fields
-        resetForm();
+        
       } finally {
         // Ensure that setSubmitting(false) is called in all cases
         setSubmitting(false);
+        // Clear form fields
+        resetForm();
       }
     },
   });
